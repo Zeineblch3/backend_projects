@@ -187,6 +187,13 @@ Activité 11 :
 4. le service doit appeler senJson() parce qu'il concerne HTTP, le service doit rester indépendant.
 5. l'erreur "Centre Introuvable" est détectée dans le serviceavec throw puis gérée par le controleur avec catch.
 
+Activité 12 :
+
+1. handleCentreRoutes() permet de reconnaitre les URLs et appeler le controleur correspondant.
+2. elle retourne true (la route été trouvée et traitée) , ou false (aucune route trouvée)
+3. match[1] est l'ID du centre récupéré depuis URL.
+4. Number() transforme match[1] (chaine) en nombre pour pouvoir chercher l'id.
+5. /api/centres :récupére tous les centres , /api/centres/1 :récupére un centre précis.
 
 
 
