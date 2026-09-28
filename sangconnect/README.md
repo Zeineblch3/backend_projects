@@ -146,6 +146,24 @@ Promise rejetée :
 estarting 'src/server.js'
 Impossible de récupérer le centre
 
+Activité 7 :
+
+1. async indique qu'une fonction est asynchrone , qu'elle retourne une Promise.
+2. await permet d'attendre le résultat d'une Promise avant de continuer l'exécution.
+3. await ne bloque pas le serveur , il met seulement en pause la fonction asynchrone concernée.
+4. si Promise est rejetée une erreur est génerée, on peut la gérer avec try..catch.
+
+Activité 8 :
+
+Restarting 'src/server.js'
+Erreur : Centre indisponible
+
+1. try contient le code qui peut provoquer une erreur.
+2. catch récupére et traite l'erreur.
+3. error contient l'erreur
+4. on ne doit pas laisser les erreurs async sans traitement car elles peuvent provoquer un lantage de programme.
+
+
 
 
 

@@ -42,15 +42,19 @@ server.listen(port, () => { console.log(`Serveur démarré sur http://localhost:
 function getCentre() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            reject(new Error("Impossible de récupérer le centre"))
+            reject(new Error("Centre indisponible"));
         }, 1000)
     });
 }
-getCentre().then(centre=> {
-    console.log(centre);
-})
-.catch(error => {
-    console.error(error.message);
-});
+async function afficherCentre(){
+    try {
+        const centre = await getCentre();
+        console.log(centre);
+    }catch (error){
+        console.error("Erreur :", error.message);
+    }
+    
+}
+afficherCentre();
 
 
