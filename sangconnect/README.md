@@ -171,6 +171,13 @@ Activité 9 :
 4. Non, req et res appartiennent à la partie qui gére les requetes et les réponses HTTP ils n'ont aucun rapport avec le repo.
 5. cette séparation permet de diviser les reponsabilités donc avoir un code clair.
 
+Activité 10 : 
+
+1. Service contient la logique métier de l'application.
+2. le service utilise le repository pour récupérer les données.
+3. le service ne manipule pas directement res , car res appartient à la partie HTTP, le service doit rester indépendant de HTTP.
+4. une règle métier doit etre dans le service.
+5. on sépare le service du repo car le repo gére les données et le service gére la logique.
 
 
 
