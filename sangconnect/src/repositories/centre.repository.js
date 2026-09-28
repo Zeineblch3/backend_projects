@@ -5,7 +5,7 @@ const centres = [
         ville: "Tunis"
     },
     {
-        id: 12,
+        id: 2,
         nom: "Centre régional de Sousse",
         ville: "Sousse"
     },
@@ -19,6 +19,6 @@ const centres = [
 export async function findAll(){
     return centres;
 }
-export async function findByTd(id){
+export async function findById(id){
     return centres.find(centre => centre.id === id);
 }

@@ -1,4 +1,4 @@
-import { listCentres, showCentre } from "../controllers/centre.controller";
+import { listCentres, showCentre } from "../controllers/centre.controller.js";
 
 export async function handleCentreRoutes(req, res){
     if (req.url === "/api/centres" && req.method === "GET"){

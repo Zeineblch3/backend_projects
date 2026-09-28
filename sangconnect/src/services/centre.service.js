@@ -1,4 +1,4 @@
-import { findAll, findById } from "../repositories/centre.repository";
+import { findAll, findById } from "../repositories/centre.repository.js";
 
 export async function getAllCentres(){
     return await findAll();

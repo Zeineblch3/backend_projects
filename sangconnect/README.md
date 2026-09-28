@@ -195,5 +195,39 @@ Activité 12 :
 4. Number() transforme match[1] (chaine) en nombre pour pouvoir chercher l'id.
 5. /api/centres :récupére tous les centres , /api/centres/1 :récupére un centre précis.
 
+Activité 13 + 14 :
 
+1. curl -i http://localhost:3000/api/centres
 
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Mon, 28 Sep 2026 11:42:47 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"data":[{"id":1,"nom":"Centre de transfusion de Tunis","ville":"Tunis"},{"id":12,"nom":"Centre régional de Sousse","ville":"Sousse"},{"id":3,"nom":"Centre régional de Sfax","ville":"Sfax"}]}
+
+2. curl -i http://localhost:3000/api/centres/1
+
+Content-Type: application/json; charset=utf-8
+Date: Mon, 28 Sep 2026 11:50:17 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"data":{"id":1,"nom":"Centre de transfusion de Tunis","ville":"Tunis"}}
+
+3. curl -i http://localhost:3000/api/centres/99
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json; charset=utf-8
+Date: Mon, 28 Sep 2026 11:51:35 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"error":"Centre introuvable"}
+
+4. le couche route reçoit la rq HTTP en premier et détermine quel controleur a appeler.
+5. Oui, on peut remplacer les données par une base de données, il suffit de modifier le repo pour récupérer des données depuis une base de données.
