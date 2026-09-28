@@ -163,6 +163,14 @@ Erreur : Centre indisponible
 3. error contient l'erreur
 4. on ne doit pas laisser les erreurs async sans traitement car elles peuvent provoquer un lantage de programme.
 
+Activité 9 : 
+
+1. Les données sont stockés sous centre.repository.js dasn un tableau centres.
+2. ce fichier est appelé repository car il occupe de l'accès aux données: rechercher tous les centres ou par id.
+3. Non, le repo ne s'occupe pas de HTTP.
+4. Non, req et res appartiennent à la partie qui gére les requetes et les réponses HTTP ils n'ont aucun rapport avec le repo.
+5. cette séparation permet de diviser les reponsabilités donc avoir un code clair.
+
 
 
 
