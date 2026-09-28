@@ -1,13 +1,13 @@
-Atelier 1 - Découverte de Node.js et cycle de vie HTTP
+# Atelier 1 - Découverte de Node.js et cycle de vie HTTP
 
-Activité 1 :
+### Activité 1 :
 
 1. Version node.js : v22.22.1
 2. Version npm : 9.2.0
 3. Chemin de node : /usr/bin/node
 4. Chemin de npm : /usr/bin/npm
 
-Activité 2 :
+### Activité 2 :
 
 1. Le champ name définit le nom du projet
 2. Le champ version indique la version du projet
@@ -19,12 +19,12 @@ Activité 2 :
 8. export function F() {}
 9. .js permet de localiser le fichier importé l'extension n'est pas importée automatiquement
 
-Activité 4 :
+### Activité 4 :
 
 1. const déclare une variable qui ne peut pas etre redéfinie alors que let permet de modifier sa valeur
 2. const évite les réaffectations accidentelles
 
-Activité 5 :
+### Activité 5 :
 
 1. http.createServer() crée un serveur HTTP
 2. (req,res)=>{...} éxecutée chaque fois qu'une req http arrive
@@ -33,7 +33,7 @@ Activité 5 :
 5. res.end() termine et envoie la réponse
 6. si le port 3000 est déjà utilisé node génére une erreur 
 
-Activité 6 :
+### Activité 6 :
 
 1. req.method permet de connaitre la méthode http
 2. req.url permet de connaitre l'url demandé
@@ -47,7 +47,7 @@ Activité 6 :
 10. la fonction doit recevoir res statusCose et data
 11. /api/health envoie 200 , une route inéxistante envoie 404
 
-Activité 7 : 
+### Activité 7 : 
 
 curl -i http://localhost:3000/api/diagnostic
 HTTP/1.1 200 OK
@@ -81,7 +81,7 @@ Transfer-Encoding: chunked
 2. on utilise la route /health pour vérifier si le serveur est opérationnel, elle doit etre rapide 
 3. vérification de disponibilité vérifie que le serveur répond mais la vérification compléte vérifie aussi l'état et les dépendances
 
-Activité 9 :
+### Activité 9 :
 
 1. server.js démarre le serveur et gére les req http
 2. 30 routes rendent l'app long et difficile à organiser
@@ -93,25 +93,25 @@ Activité 9 :
 
 sedJson() : permet d'envoyer une réponse HTTP au format JSON, elle doit recevoir res , statusCode et data 
 
-Atelier 2 - Modules, Programmation asynchrone et Architecture en couches
+# Atelier 2 - Modules, Programmation asynchrone et Architecture en couches
 
-Activité 1 : 
+### Activité 1 : 
 
 1. Si server.js devient long et difficile à parcourir, il ne sera pas facile de retrouver la fonction responsable de la recherche d'un centre.
 2. Si plusieurs fichiers ont besoin de getCentreById() il faut recopier la fonction cela crée des répetitions.
 3. Placer cette fonction dans un fichier séparé sert à la réutiliser plusieurs fois  sans répetition.
 4. Un module regroupe des fonctions liées dans un fichier séparé puis l'exporter et importer selon besoin.
 
-Activité 2 :
+### Activité 2 :
 
 node src/server.js => Centre Tunis - Tunis
 
-Activité 3 :
+### Activité 3 :
 
 1. les accolades servent à importer une fonction exportée avec son nom depuis un module.
 2. Oui, on peut exporter plusieurs fonctions depuis un meme fichier.
 
-Activité 4 :
+### Activité 4 :
 
 Restarting 'src/server.js'
 Début
@@ -123,7 +123,7 @@ Opération terminée
 3. Une opération programmée avec setTimeout() est asynchrone qui sera exécutée après le délai.
 4. Ce comportement permet le serveur de traiter les autres demandes pendant qu'une prend du temps.
 
-Activité 5 :
+### Activité 5 :
 
 Restarting 'src/server.js'
 Centre récupéré
@@ -134,26 +134,26 @@ Centre récupéré
 4. Aprés une seconde, resole() est exécutée puis .then() affiche le message dans la console.
 5. .then() récupére et traite le résultat lorsqu'elle est terminée.
 
-Activité 6 :
+### Activité 6 :
 
-Promise Réussie : 
+#### Promise Réussie : 
 
 Restarting 'src/server.js'
 { id: 1, nom: 'Centre Tunis', ville: 'Tunis' }
 
-Promise rejetée :
+#### Promise rejetée :
 
 estarting 'src/server.js'
 Impossible de récupérer le centre
 
-Activité 7 :
+### Activité 7 :
 
 1. async indique qu'une fonction est asynchrone , qu'elle retourne une Promise.
 2. await permet d'attendre le résultat d'une Promise avant de continuer l'exécution.
 3. await ne bloque pas le serveur , il met seulement en pause la fonction asynchrone concernée.
 4. si Promise est rejetée une erreur est génerée, on peut la gérer avec try..catch.
 
-Activité 8 :
+### Activité 8 :
 
 Restarting 'src/server.js'
 Erreur : Centre indisponible
@@ -163,7 +163,7 @@ Erreur : Centre indisponible
 3. error contient l'erreur
 4. on ne doit pas laisser les erreurs async sans traitement car elles peuvent provoquer un lantage de programme.
 
-Activité 9 : 
+### Activité 9 : 
 
 1. Les données sont stockés sous centre.repository.js dasn un tableau centres.
 2. ce fichier est appelé repository car il occupe de l'accès aux données: rechercher tous les centres ou par id.
@@ -171,7 +171,7 @@ Activité 9 :
 4. Non, req et res appartiennent à la partie qui gére les requetes et les réponses HTTP ils n'ont aucun rapport avec le repo.
 5. cette séparation permet de diviser les reponsabilités donc avoir un code clair.
 
-Activité 10 : 
+### Activité 10 : 
 
 1. le Service contient la logique métier de l'application.
 2. le service utilise le repository pour récupérer les données.
@@ -179,7 +179,7 @@ Activité 10 :
 4. une règle métier doit etre dans le service.
 5. on sépare le service du repo car le repo gére les données et le service gére la logique.
 
-Activité 11 :
+### Activité 11 :
 
 1. le Controller fait le lien entre HTTP et la logique métier, il reçoit la req et prépare la res.
 2. le controleur connait le HTTP car il utilise req et res pour la gestion.
@@ -187,7 +187,7 @@ Activité 11 :
 4. le service doit appeler senJson() parce qu'il concerne HTTP, le service doit rester indépendant.
 5. l'erreur "Centre Introuvable" est détectée dans le serviceavec throw puis gérée par le controleur avec catch.
 
-Activité 12 :
+### Activité 12 :
 
 1. handleCentreRoutes() permet de reconnaitre les URLs et appeler le controleur correspondant.
 2. elle retourne true (la route été trouvée et traitée) , ou false (aucune route trouvée)
@@ -195,7 +195,7 @@ Activité 12 :
 4. Number() transforme match[1] (chaine) en nombre pour pouvoir chercher l'id.
 5. /api/centres :récupére tous les centres , /api/centres/1 :récupére un centre précis.
 
-Activité 13 + 14 :
+### Activité 13 + 14 :
 
 1. curl -i http://localhost:3000/api/centres
 
@@ -232,11 +232,11 @@ Transfer-Encoding: chunked
 4. le couche route reçoit la rq HTTP en premier et détermine quel controleur a appeler.
 5. Oui, on peut remplacer les données par une base de données, il suffit de modifier le repo pour récupérer des données depuis une base de données.
 
-Activité 15 : 
+### Activité 15 : 
 
 1. la vérification if(!city || city.trim() === "") doit se trouver dans le service plutot que dans le repo car le service verifie les regles métier er les données reçues.
 
-Activité 16 :
+### Activité 16 :
 
 1. Si on modifie findAll() avec un throw error:
 curl -i http://localhost:3000/api/centres
@@ -252,7 +252,7 @@ Transfer-Encoding: chunked
 3. la couche controleur la récupére dans le bloc try..catch.
 4. il faut pas retourner le message technique complet car il peut contenir des informations sensibles.
 
-Activité 18 - Questions de synthése
+### Activité 18 - Questions de synthése
 
 1. async function vs function : async permet à la fonction de retourner une promise et utiliser await.
 2. const res=await op(); vs op().then(res=>{}) : les deux attendent le res d'une promise mais await utilise une syntaxe simple.
@@ -260,7 +260,7 @@ Activité 18 - Questions de synthése
 4. try/catch permet de récupérer et gérer les erreurs produites par une opération async.
 5. on peut remplacer le repo pour utiliser Postgres.
 
-Travail Demandé : 
+## Travail Demandé : 
 
 1. curl -i http://localhost:3000/api/donneurs
 HTTP/1.1 200 OK
