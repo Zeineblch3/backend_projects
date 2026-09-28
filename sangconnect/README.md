@@ -123,6 +123,28 @@ Opération terminée
 3. Une opération programmée avec setTimeout() est asynchrone qui sera exécutée après le délai.
 4. Ce comportement permet le serveur de traiter les autres demandes pendant qu'une prend du temps.
 
+Activité 5 :
+
+Restarting 'src/server.js'
+Centre récupéré
+
+1. Au début, Promise est en état pending (en attente).
+2. resolve() indique que l'opération est réussie et fournit la res "Centre récupéré".
+3. reject() indique que l'opération a échoué et fournit une erreur.
+4. Aprés une seconde, resole() est exécutée puis .then() affiche le message dans la console.
+5. .then() récupére et traite le résultat lorsqu'elle est terminée.
+
+Activité 6 :
+
+Promise Réussie : 
+
+Restarting 'src/server.js'
+{ id: 1, nom: 'Centre Tunis', ville: 'Tunis' }
+
+Promise rejetée :
+
+
+1. 
 
 
 

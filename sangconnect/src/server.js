@@ -39,14 +39,18 @@ const server = http.createServer((req,res) => {
 server.listen(port, () => { console.log(`Serveur démarré sur http://localhost:${port}`)});
 */
 
-const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve("Centre récupéré");
-    }, 1000)
-});
-
-promise.then(result => {
-    console.log(result);
+function getCentre() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new Error("Impossible de récupérer le centre"))
+        }, 1000)
+    });
+}
+getCentre().then(centre=> {
+    console.log(centre);
 })
+.catch(error => {
+    console.error(error.message);
+});
 
 
