@@ -1,3 +1,5 @@
+Atelier 1 - Découverte de Node.js et cycle de vie HTTP
+
 Activité 1 :
 
 1. Version node.js : v22.22.1
@@ -90,3 +92,37 @@ Activité 9 :
    service/ : logique metier
 
 sedJson() : permet d'envoyer une réponse HTTP au format JSON, elle doit recevoir res , statusCode et data 
+
+Atelier 2 - Modules, Programmation asynchrone et Architecture en couches
+
+Activité 1 : 
+
+1. Si server.js devient long et difficile à parcourir, il ne sera pas facile de retrouver la fonction responsable de la recherche d'un centre.
+2. Si plusieurs fichiers ont besoin de getCentreById() il faut recopier la fonction cela crée des répetitions.
+3. Placer cette fonction dans un fichier séparé sert à la réutiliser plusieurs fois  sans répetition.
+4. Un module regroupe des fonctions liées dans un fichier séparé puis l'exporter et importer selon besoin.
+
+Activité 2 :
+
+node src/server.js => Centre Tunis - Tunis
+
+Activité 3 :
+
+1. les accolades servent à importer une fonction exportée avec son nom depuis un module.
+2. Oui, on peut exporter plusieurs fonctions depuis un meme fichier.
+
+Activité 4 :
+
+Restarting 'src/server.js'
+Début
+Fin
+Opération terminée
+
+1. "Fin" apparait avant "Opération terminée" car setTimeout() programme l'opération pour plus tard.
+2. Non, le programme ,n'est pas bloqué il continue son exécution pendant ces deux secondes.
+3. Une opération programmée avec setTimeout() est asynchrone qui sera exécutée après le délai.
+4. Ce comportement permet le serveur de traiter les autres demandes pendant qu'une prend du temps.
+
+
+
+
