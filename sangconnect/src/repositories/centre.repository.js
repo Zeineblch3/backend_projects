@@ -17,8 +17,14 @@ const centres = [
 ];
 
 export async function findAll(){
-    return centres;
+    throw new Error("Base de sonnées insipensable")
 }
 export async function findById(id){
     return centres.find(centre => centre.id === id);
+}
+
+export async function searchByCity(city){
+    return centres.filter(
+        centre => centre.ville.toLowerCase() === city.toLowerCase()
+    );
 }

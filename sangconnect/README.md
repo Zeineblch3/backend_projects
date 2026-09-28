@@ -231,3 +231,23 @@ Transfer-Encoding: chunked
 
 4. le couche route reçoit la rq HTTP en premier et détermine quel controleur a appeler.
 5. Oui, on peut remplacer les données par une base de données, il suffit de modifier le repo pour récupérer des données depuis une base de données.
+
+Activité 15 : 
+
+1. la vérification if(!city || city.trim() === "") doit se trouver dans le service plutot que dans le repo car le service verifie les regles métier er les données reçues.
+
+Activité 16 :
+
+1. Si on modifie findAll() avec un throw error:
+curl -i http://localhost:3000/api/centres
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json; charset=utf-8
+Date: Mon, 28 Sep 2026 12:12:09 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"error":"Erreur interne du serveur"}
+2. la couche repo génére l'erreur.
+3. la couche controleur la récupére dans le bloc try..catch.
+4. il faut pas retourner le message technique complet car il peut contenir des informations sensibles.
