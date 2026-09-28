@@ -251,3 +251,11 @@ Transfer-Encoding: chunked
 2. la couche repo génére l'erreur.
 3. la couche controleur la récupére dans le bloc try..catch.
 4. il faut pas retourner le message technique complet car il peut contenir des informations sensibles.
+
+Activité 18 - Questions de synthése
+
+1. async function vs function : async permet à la fonction de retourner une promise et utiliser await.
+2. const res=await op(); vs op().then(res=>{}) : les deux attendent le res d'une promise mais await utilise une syntaxe simple.
+3. 3 états principaux d'une promise : pending, fulfilled, rejected.
+4. try/catch permet de récupérer et gérer les erreurs produites par une opération async.
+5. on peut remplacer le repo pour utiliser Postgres.

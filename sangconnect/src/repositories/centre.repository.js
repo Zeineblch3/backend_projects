@@ -17,7 +17,7 @@ const centres = [
 ];
 
 export async function findAll(){
-    throw new Error("Base de sonnées insipensable")
+    return centres;
 }
 export async function findById(id){
     return centres.find(centre => centre.id === id);
