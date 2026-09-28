@@ -173,11 +173,19 @@ Activité 9 :
 
 Activité 10 : 
 
-1. Service contient la logique métier de l'application.
+1. le Service contient la logique métier de l'application.
 2. le service utilise le repository pour récupérer les données.
 3. le service ne manipule pas directement res , car res appartient à la partie HTTP, le service doit rester indépendant de HTTP.
 4. une règle métier doit etre dans le service.
 5. on sépare le service du repo car le repo gére les données et le service gére la logique.
+
+Activité 11 :
+
+1. le Controller fait le lien entre HTTP et la logique métier, il reçoit la req et prépare la res.
+2. le controleur connait le HTTP car il utilise req et res pour la gestion.
+3. il appelle le service car il contient la logique métier, il lui demande d'effectuer le traitement.
+4. le service doit appeler senJson() parce qu'il concerne HTTP, le service doit rester indépendant.
+5. l'erreur "Centre Introuvable" est détectée dans le serviceavec throw puis gérée par le controleur avec catch.
 
 
 
