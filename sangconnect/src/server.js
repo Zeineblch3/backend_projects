@@ -39,30 +39,72 @@ const server = http.createServer((req,res) => {
 server.listen(port, () => { console.log(`Serveur démarré sur http://localhost:${port}`)});
 */
 
-import http from "node:http";
-import { handleDonneurRoutes } from "./routes/donneur.routes.js";
-import { sendJson } from "./utils/http.js";
+import express from "express";
 
-const port = 3000;
-const server = http.createServer(async(req , res) => {
-    const handled = await handleDonneurRoutes(req,res);
-    if (handled){
-        return;
+const app = express();
+const PORT = 3000;
+
+const donneurs = [
+    {
+        id: 1,
+        nom: "ben ali",
+        prenom: "ahmed",
+        groupeSanguin: "O+",
+        ville: "Tunis"
+    },
+    {
+        id: 2,
+        nom: "kacem",
+        prenom: "omar",
+        groupeSanguin: "B+",
+        ville: "Tunis"
+    },{
+        id: 3,
+        nom: "lallouch",
+        prenom: "zeineb",
+        groupeSanguin: "A+",
+        ville: "Sousse"
     }
-    if (req.url === "/" && req.method === "GET"){
-        sendJson(res, 200, {
-            message: "Bienvenue dans SangConnect"
-        });
-        return;
-    }
-    sendJson(res, 404, {
-        error: "Route non trouvée",
-        path: req.url,
-        method: req.method
+]
+
+app.get("/", (req, res) => {
+    res.send("Bienvenue dans SangConnect");
+});
+
+app.listen(PORT, () => {
+    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+});
+
+app.get("/api/health", (req, res)=> {
+    res.json({
+        status: "OK",
+        service: "SangConnect"
     });
 });
-server.listen(port, () => {
-    console.log(`Serveur démarré sur http://localhost:${port}`);
+
+
+app.get("/api/donneurs/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const donneur = donneurs.find(
+        donneur => donneur.id === id
+    );
+    if (!donneur){
+        return res.status(404).json({
+            message: "Donneur introuvable"
+        });
+    }
+    res.json(donneur);
 });
+
+app.get("/api/donneurs", (req, res) => {
+    const groupe = req.query.groupeSanguin;
+    if (!groupe){
+        return res.json(donneurs);
+    }
+    const resultat = donneurs.filter(
+        donneur => donneur.groupeSanguin === groupe
+    );
+    res.json(resultat);
+})
 
 
