@@ -1,54 +1,89 @@
-/*import { findAll, findById, searchByVille} from "../repositories/donneur.repository.js";
-
-export async function getAllDonneurs(){
-    return await findAll();
-}
-export async function getDonneurById(id){
-    const donneur = await findById(id);
-    if (!donneur){
-        throw new Error("Donneur introuvable");
-    }
-    return donneur;
-}
-
-export async function searchDonneurByVille(ville){
-    if(!ville || ville.trim() === ""){
-        throw new Error("la ville est obligtoire");
-    }
-    return await searchByVille(ville);
-} */
-
-
-
-
 const donneurs = [
     {
         id: 1,
-        nom: "ben ali",
-        prenom: "ahmed",
-        groupeSanguin: "O+",
-        ville: "Tunis"
-    },{
+        nom: "Ben Ali",
+        prenom: "Ahmed",
+        groupeSanguin: "A+"
+    },
+    {
         id: 2,
-        nom: "kacem",
-        prenom: "omar",
-        groupeSanguin: "B+",
-        ville: "Tunis"
-    },{
-        id: 3,
-        nom: "lallouch",
-        prenom: "zeineb",
-        groupeSanguin: "A+",
-        ville: "Sousse"
+        nom: "Trabelsi",
+        prenom: "Sami",
+        groupeSanguin: "O+"
     }
-]
+];
 
-export function getAll(){
+export function getAll() {
     return donneurs;
 }
 
-export function getById(id){
+export function getById(id) {
     return donneurs.find(
         donneur => donneur.id === id
     );
+}
+
+export function create(data) {
+    const donneur = {
+        id: donneurs.length > 0
+            ? Math.max(...donneurs.map(d => d.id)) + 1
+            : 1,
+        nom: data.nom,
+        prenom: data.prenom,
+        groupeSanguin: data.groupeSanguin
+    };
+
+    donneurs.push(donneur);
+
+    return donneur;
+}
+
+export function update(id, data) {
+    const donneur = getById(id);
+
+    if (!donneur) {
+        return null;
+    }
+
+    donneur.nom = data.nom;
+    donneur.prenom = data.prenom;
+    donneur.groupeSanguin = data.groupeSanguin;
+
+    return donneur;
+}
+
+export function patch(id, data) {
+    const donneur = getById(id);
+
+    if (!donneur) {
+        return null;
+    }
+
+    if (data.nom !== undefined) {
+        donneur.nom = data.nom;
+    }
+
+    if (data.prenom !== undefined) {
+        donneur.prenom = data.prenom;
+    }
+
+    if (data.groupeSanguin !== undefined) {
+        donneur.groupeSanguin = data.groupeSanguin;
+    }
+
+    return donneur;
+}
+
+export function remove(id) {
+    const index = donneurs.findIndex(
+        donneur => donneur.id === id
+    );
+
+    if (index === -1) {
+        return false;
+    }
+
+    donneurs.splice(index, 1);
+
+    return true;
 }
