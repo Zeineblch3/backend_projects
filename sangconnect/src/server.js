@@ -1,6 +1,7 @@
 import express from "express";
 
 import donneurRoutes from "./routes/donneur.routes.js";
+import centreRoutes from "./routes/centre.routes.js";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/donneurs", donneurRoutes);
+app.use("/api/centres", centreRoutes);
 
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur http://localhost:${PORT}`);

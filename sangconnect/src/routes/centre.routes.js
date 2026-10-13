@@ -1,17 +1,19 @@
-import { listCentres, showCentre } from "../controllers/centre.controller.js";
+import express from "express";
 
-export async function handleCentreRoutes(req, res){
-    if (req.url === "/api/centres" && req.method === "GET"){
-        await listCentres(req, res);
-        return true;
-    }
+import {getAll,getById,create,update,patch,remove} from "../controllers/centre.controller.js";
 
-    const match = req.url.match(/^\/api\/centres\/(\d+)$/);
+const router = express.Router();
 
-    if (match && req.method === "GET"){
-        const id = Number(match[1]);
-        await showCentre(req, res, id);
-        return true;
-    }
-    return false;
-}
+router.get("/", getAll);
+
+router.get("/:id", getById);
+
+router.post("/", create);
+
+router.put("/:id", update);
+
+router.patch("/:id", patch);
+
+router.delete("/:id", remove);
+
+export default router;

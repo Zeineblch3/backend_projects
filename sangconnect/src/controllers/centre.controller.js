@@ -1,30 +1,87 @@
-import { getAllCentres, getCentreById } from "../services/centre.service.js";
-import { sendJson } from "../utils/http.js";
+import * as centreService from "../services/centre.service.js";
 
-export async function listCentres(req, res) {
-    try {
-        const centres = await getAllCentres();
+export function getAll(req, res) {
+    const ville = req.query.ville;
 
-        sendJson(res, 200, {
-            data: centres
-        });
-    } catch (error) {
-        sendJson(res, 500, {
-            error: "Erreur interne du serveur"
-        });
+    if (ville) {
+        return res.json(
+            centreService.getByVille(ville)
+        );
     }
+
+    res.json(centreService.getAll());
 }
 
-export async function showCentre(req, res, id) {
-    try {
-        const centre = await getCentreById(id);
+export function getById(req, res) {
+    const id = Number(req.params.id);
+    const centre = centreService.getById(id);
 
-        sendJson(res, 200, {
-            data: centre
-        });
-    } catch (error) {
-        sendJson(res, 404, {
-            error: error.message
+    if (!centre) {
+        return res.status(404).json({
+            message: "Centre introuvable"
         });
     }
+
+    res.json(centre);
+}
+
+export function create(req, res) {
+    const { nom, ville, adresse, telephone } = req.body;
+
+    if (!nom || !ville || !adresse || !telephone) {
+        return res.status(400).json({
+            message: "Données invalides"
+        });
+    }
+
+    const centre = centreService.create(req.body);
+
+    res.status(201).json(centre);
+}
+
+export function update(req, res) {
+    const id = Number(req.params.id);
+    const { nom, ville, adresse, telephone } = req.body;
+
+    if (!nom || !ville || !adresse || !telephone) {
+        return res.status(400).json({
+            message: "Données invalides"
+        });
+    }
+
+    const centre = centreService.update(id, req.body);
+
+    if (!centre) {
+        return res.status(404).json({
+            message: "Centre introuvable"
+        });
+    }
+
+    res.json(centre);
+}
+
+export function patch(req, res) {
+    const id = Number(req.params.id);
+    const centre = centreService.patch(id, req.body);
+
+    if (!centre) {
+        return res.status(404).json({
+            message: "Centre introuvable"
+        });
+    }
+
+    res.json(centre);
+}
+
+export function remove(req, res) {
+    const id = Number(req.params.id);
+    const deleted = centreService.remove(id);
+
+    if (!deleted) {
+        return res.status(404).json({
+            message: "Centre introuvable"
+        });
+    }
+
+    res.status(204).send();
 }

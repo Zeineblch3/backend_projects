@@ -1,4 +1,4 @@
-const centres = [
+/*const centres = [
     {
         id: 1,
         nom: "Centre de transfusion de Tunis",
@@ -28,3 +28,4 @@ export async function searchByCity(city){
         centre => centre.ville.toLowerCase() === city.toLowerCase()
     );
 }
+*/

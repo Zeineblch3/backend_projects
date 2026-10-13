@@ -87,3 +87,9 @@ export function remove(id) {
 
     return true;
 }
+
+export function getByGroupeSanguin(groupeSanguin) {
+    return donneurs.filter(
+        donneur => donneur.groupeSanguin === groupeSanguin
+    );
+}
