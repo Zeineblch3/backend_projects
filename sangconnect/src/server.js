@@ -40,71 +40,25 @@ server.listen(port, () => { console.log(`Serveur démarré sur http://localhost:
 */
 
 import express from "express";
+import donneurRoutes from "./routes/donneur.routes.js";
 
 const app = express();
 const PORT = 3000;
 
-const donneurs = [
-    {
-        id: 1,
-        nom: "ben ali",
-        prenom: "ahmed",
-        groupeSanguin: "O+",
-        ville: "Tunis"
-    },
-    {
-        id: 2,
-        nom: "kacem",
-        prenom: "omar",
-        groupeSanguin: "B+",
-        ville: "Tunis"
-    },{
-        id: 3,
-        nom: "lallouch",
-        prenom: "zeineb",
-        groupeSanguin: "A+",
-        ville: "Sousse"
-    }
-]
+
+app.use(express.json());
+
+app.get("/api/donneurs", (req, res) => {
+    res.json(donneurs);
+});
 
 app.get("/", (req, res) => {
-    res.send("Bienvenue dans SangConnect");
+    res.json({
+        message: "Bienvenue dans l'API SangConnect"});
 });
+
+app.use("/api/donneurs", donneurRoutes);
 
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur http://localhost:${PORT}`);
 });
-
-app.get("/api/health", (req, res)=> {
-    res.json({
-        status: "OK",
-        service: "SangConnect"
-    });
-});
-
-
-app.get("/api/donneurs/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const donneur = donneurs.find(
-        donneur => donneur.id === id
-    );
-    if (!donneur){
-        return res.status(404).json({
-            message: "Donneur introuvable"
-        });
-    }
-    res.json(donneur);
-});
-
-app.get("/api/donneurs", (req, res) => {
-    const groupe = req.query.groupeSanguin;
-    if (!groupe){
-        return res.json(donneurs);
-    }
-    const resultat = donneurs.filter(
-        donneur => donneur.groupeSanguin === groupe
-    );
-    res.json(resultat);
-})
-
-

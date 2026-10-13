@@ -1,4 +1,4 @@
-import { listDonneurs, showDonneur } from "../controllers/donneur.controller.js";
+/*import { listDonneurs, showDonneur } from "../controllers/donneur.controller.js";
 
 export async function handleDonneurRoutes(req, res){
     
@@ -17,3 +17,14 @@ export async function handleDonneurRoutes(req, res){
     }
     return false;
 }
+
+*/
+
+
+import express from "express";
+import { getAll, getById} from "../controllers/donneur.controller.js";
+
+const router = express.Router();
+router.get("/", getAll);
+router.get("/:id",getById);
+export default router;

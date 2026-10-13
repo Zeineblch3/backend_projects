@@ -45,3 +45,27 @@ Keep-Alive: timeout=5
 
 6. req.params : récupère les paramètres définis dans la route "/api/donneurs/2".
    req.query : récupère les paramétres après ? dans l'URL "/api/donneurs?groupe=A%2B".
+
+7. curl -X POST http://localhost:3000/api/donneurs -H "Content-Type: application/json" -d '{"nom":  "lach","prenom": "zeineb", "groupeSanguin": "B+"}'
+
+{"id":4,"nom":"lach","prenom":"zeineb","groupeSanguin":"B+"}
+
+8. req.body récupére les données envoyées par le client dans le corps de la requéte.
+9. express.json() permet à express de lire et convertir le json reçu en objet js accessible via req.body.
+10. Code 201 indique que la ressource a été créée avec succès.
+11. Code 200 indique que la requete a réussi.
+
+12. curl -X PUT http://localhost:3000/api/donneurs/3 -H "Content-Type: application/json" -d '{"nom":"lallouch","prenom":"zeineb","groupeSanguin":"O-"}'
+
+{"id":3,"nom":"lallouch","prenom":"zeineb","groupeSanguin":"O-","ville":"Sousse"}
+
+13. curl -X PATCH http://localhost:3000/api/donneurs/2 -H "Content-Type: application/json" -d '{"nom":"letaif"}'
+
+{"id":2,"nom":"letaif","prenom":"omar","groupeSanguin":"B+","ville":"Tunis"}
+
+14. curl -i -X DELETE http://localhost:3000/api/donneurs/2
+HTTP/1.1 204 No Content
+X-Powered-By: Express
+Date: Tue, 13 Oct 2026 15:47:16 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
