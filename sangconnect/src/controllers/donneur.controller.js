@@ -12,17 +12,29 @@ export function getAll(req, res) {
     res.json(donneurService.getAll());
 }
 
-export function getById(req, res) {
-    const id = Number(req.params.id);
-    const donneur = donneurService.getById(id);
+export function getById(req, res, next) {
 
-    if (!donneur) {
-        return res.status(404).json({
-            message: "Donneur introuvable"
-        });
+    try {
+
+        const id = Number(req.params.id);
+
+        const donneur = donneurService.getById(id);
+
+        if (!donneur) {
+
+            const error = new Error("Donneur introuvable");
+
+            error.statusCode = 404;
+
+            throw error;
+        }
+
+        res.json(donneur);
+
+    } catch (error) {
+
+        next(error);
     }
-
-    res.json(donneur);
 }
 
 export function create(req, res) {

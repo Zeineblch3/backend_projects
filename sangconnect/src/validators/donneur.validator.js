@@ -2,27 +2,27 @@ import { z } from "zod";
 
 export const donneurSchema = z.object({
     nom: z.string().min(2),
-    prenom: z.string().min(2),
+    prenom: z.string().min(1),
     groupeSanguin: z.enum([
-        "A+",
-        "A-",
-        "B+",
-        "B-",
-        "AB+",
-        "AB-",
-        "O+",
-        "O-"
-    ])
+        "A+", "A-", "B+", "B-",
+        "AB+", "AB-", "O+", "O-"
+    ]),
+    email: z.string().email(),
+    telephone: z.string().regex(
+        /^[0-9]{8}$/,
+        "Le numéro doit contenir exactement 8 chiffres"
+    )
 });
 
-const donneur = {
-    nom: "",
-    prenom: "Ahmed",
-    groupeSanguin: "XYZ"
-};
+export const idSchema = z.object({
+    id: z.coerce.number().int().positive()
+});
 
-const resultat = donneurSchema.safeParse(donneur);
+export const donneurQuerySchema = z.object({
+    groupeSanguin: z.enum([
+        "A+", "A-", "B+", "B-",
+        "AB+", "AB-", "O+", "O-"
+    ]).optional()
+});
 
-if (!resultat.success) {
-    console.log(resultat.error);
-}
+export const updateDonneurSchema = donneurSchema.partial();

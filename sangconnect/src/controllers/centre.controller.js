@@ -26,28 +26,12 @@ export function getById(req, res) {
 }
 
 export function create(req, res) {
-    const { nom, ville, adresse, telephone } = req.body;
-
-    if (!nom || !ville || !adresse || !telephone) {
-        return res.status(400).json({
-            message: "Données invalides"
-        });
-    }
-
     const centre = centreService.create(req.body);
-
     res.status(201).json(centre);
 }
 
 export function update(req, res) {
     const id = Number(req.params.id);
-    const { nom, ville, adresse, telephone } = req.body;
-
-    if (!nom || !ville || !adresse || !telephone) {
-        return res.status(400).json({
-            message: "Données invalides"
-        });
-    }
 
     const centre = centreService.update(id, req.body);
 
