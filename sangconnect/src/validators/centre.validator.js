@@ -5,7 +5,7 @@ export const centreSchema = z.object({
     nom: z.string().min(2),
     ville: z.string().min(2),
     adresse: z.string().min(3),
-    telephone: z.string().min(8)
+    telephone: z.string().regex(/^[0-9]{8}$/)
 });
 
 // Validation de l'identifiant

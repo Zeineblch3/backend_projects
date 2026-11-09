@@ -7,11 +7,11 @@ export const donneurSchema = z.object({
         "A+", "A-", "B+", "B-",
         "AB+", "AB-", "O+", "O-"
     ]),
-    email: z.string().email(),
-    telephone: z.string().regex(
-        /^[0-9]{8}$/,
-        "Le numéro doit contenir exactement 8 chiffres"
-    )
+     //email: z.string().email(),
+     telephone: z.string().regex(
+         /^[0-9]{8}$/,
+         "Le numéro doit contenir exactement 8 chiffres"
+     )
 });
 
 export const idSchema = z.object({

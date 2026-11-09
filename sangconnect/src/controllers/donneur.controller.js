@@ -1,33 +1,29 @@
-import * as donneurService from "../services/donneur.service.js";
+import * as donneurService
+    from "../services/donneur.service.js";
 
-export function getAll(req, res) {
-    const groupeSanguin = req.query.groupeSanguin;
+export async function getAll(req, res, next) {
+    try {
+        const groupeSanguin = req.query.groupeSanguin;
+        const sort = req.query.sort;
 
-    if (groupeSanguin) {
-        return res.json(
-            donneurService.getByGroupeSanguin(groupeSanguin)
-        );
+        const donneurs =
+            await donneurService.getAll(groupeSanguin, sort);
+
+        res.json(donneurs);
+
+    } catch (error) {
+        next(error);
     }
-
-    res.json(donneurService.getAll());
 }
 
-export function getById(req, res, next) {
+export async function getById(req, res, next) {
 
     try {
 
         const id = Number(req.params.id);
 
-        const donneur = donneurService.getById(id);
-
-        if (!donneur) {
-
-            const error = new Error("Donneur introuvable");
-
-            error.statusCode = 404;
-
-            throw error;
-        }
+        const donneur =
+            await donneurService.getById(id);
 
         res.json(donneur);
 
@@ -37,63 +33,53 @@ export function getById(req, res, next) {
     }
 }
 
-export function create(req, res) {
-    const { nom, prenom, groupeSanguin } = req.body;
+export async function create(req, res, next) {
 
-    if (!nom || !prenom || !groupeSanguin) {
-        return res.status(400).json({
-            message: "Données invalides"
-        });
+    try {
+
+        const donneur =
+            await donneurService.create(req.body);
+
+        res.status(201).json(donneur);
+
+    } catch (error) {
+
+        next(error);
     }
-
-    const donneur = donneurService.create(req.body);
-
-    res.status(201).json(donneur);
 }
 
-export function update(req, res) {
-    const id = Number(req.params.id);
-    const donneur = donneurService.update(id, req.body);
+export async function update(req, res, next) {
 
-    if (!donneur) {
-        return res.status(404).json({
-            message: "Donneur introuvable"
-        });
+    try {
+
+        const id = Number(req.params.id);
+
+        const donneur =
+            await donneurService.update(
+                id,
+                req.body
+            );
+
+        res.json(donneur);
+
+    } catch (error) {
+
+        next(error);
     }
-
-    res.json(donneur);
 }
 
-export function patch(req, res) {
-    const id = Number(req.params.id);
-    const donneur = donneurService.patch(id, req.body);
+export async function remove(req, res, next) {
 
-    if (!donneur) {
-        return res.status(404).json({
-            message: "Donneur introuvable"
-        });
+    try {
+
+        const id = Number(req.params.id);
+
+        await donneurService.remove(id);
+
+        res.status(204).send();
+
+    } catch (error) {
+
+        next(error);
     }
-
-    res.json(donneur);
-}
-
-export function remove(req, res) {
-    const id = Number(req.params.id);
-    const deleted = donneurService.remove(id);
-
-    if (!deleted) {
-        return res.status(404).json({
-            message: "Donneur introuvable"
-        });
-    }
-
-    res.status(204).send();
-}
-
-export function getByGroupeSanguin(req, res) {
-    const groupeSanguin = req.query.groupeSanguin;
-
-    const donneurs = donneurService.getByGroupeSanguin(groupeSanguin);
-
-    res.json(donneurs);
 }

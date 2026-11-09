@@ -1,0 +1,10 @@
+-- CreateTable
+CREATE TABLE `Centre` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `nom` VARCHAR(191) NOT NULL,
+    `ville` VARCHAR(191) NOT NULL,
+    `adresse` VARCHAR(191) NOT NULL,
+    `telephone` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

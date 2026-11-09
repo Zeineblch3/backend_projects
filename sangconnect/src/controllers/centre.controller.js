@@ -1,71 +1,108 @@
-import * as centreService from "../services/centre.service.js";
+import * as centreService
+    from "../services/centre.service.js";
 
-export function getAll(req, res) {
-    const ville = req.query.ville;
+export async function getAll(req, res, next) {
+    try {
+        const ville = req.query.ville;
 
-    if (ville) {
-        return res.json(
-            centreService.getByVille(ville)
-        );
+        let centres;
+
+        if (ville) {
+            centres = await centreService.getByVille(ville);
+        } else {
+            centres = await centreService.getAll();
+        }
+
+        res.json(centres);
+
+    } catch (error) {
+        next(error);
     }
-
-    res.json(centreService.getAll());
 }
 
-export function getById(req, res) {
-    const id = Number(req.params.id);
-    const centre = centreService.getById(id);
+export async function getById(req, res, next) {
+    try {
+        const id = Number(req.params.id);
 
-    if (!centre) {
-        return res.status(404).json({
-            message: "Centre introuvable"
-        });
+        const centre = await centreService.getById(id);
+
+        if (!centre) {
+            return res.status(404).json({
+                message: "Centre introuvable"
+            });
+        }
+
+        res.json(centre);
+
+    } catch (error) {
+        next(error);
     }
-
-    res.json(centre);
 }
 
-export function create(req, res) {
-    const centre = centreService.create(req.body);
-    res.status(201).json(centre);
+export async function create(req, res, next) {
+    try {
+        const centre = await centreService.create(req.body);
+
+        res.status(201).json(centre);
+
+    } catch (error) {
+        next(error);
+    }
 }
 
-export function update(req, res) {
-    const id = Number(req.params.id);
+export async function update(req, res, next) {
+    try {
+        const id = Number(req.params.id);
 
-    const centre = centreService.update(id, req.body);
+        const centre = await centreService.update(id, req.body);
 
-    if (!centre) {
-        return res.status(404).json({
-            message: "Centre introuvable"
-        });
+        if (!centre) {
+            return res.status(404).json({
+                message: "Centre introuvable"
+            });
+        }
+
+        res.json(centre);
+
+    } catch (error) {
+        next(error);
     }
-
-    res.json(centre);
 }
 
-export function patch(req, res) {
-    const id = Number(req.params.id);
-    const centre = centreService.patch(id, req.body);
+export async function patch(req, res, next) {
+    try {
+        const id = Number(req.params.id);
 
-    if (!centre) {
-        return res.status(404).json({
-            message: "Centre introuvable"
-        });
+        const centre = await centreService.patch(id, req.body);
+
+        if (!centre) {
+            return res.status(404).json({
+                message: "Centre introuvable"
+            });
+        }
+
+        res.json(centre);
+
+    } catch (error) {
+        next(error);
     }
-
-    res.json(centre);
 }
 
-export function remove(req, res) {
-    const id = Number(req.params.id);
-    const deleted = centreService.remove(id);
+export async function remove(req, res, next) {
+    try {
+        const id = Number(req.params.id);
 
-    if (!deleted) {
-        return res.status(404).json({
-            message: "Centre introuvable"
-        });
+        const deleted = await centreService.remove(id);
+
+        if (!deleted) {
+            return res.status(404).json({
+                message: "Centre introuvable"
+            });
+        }
+
+        res.status(204).send();
+
+    } catch (error) {
+        next(error);
     }
-
-    res.status(204).send();
 }

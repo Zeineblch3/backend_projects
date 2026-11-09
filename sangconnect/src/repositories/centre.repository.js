@@ -1,31 +1,53 @@
-/*const centres = [
-    {
-        id: 1,
-        nom: "Centre de transfusion de Tunis",
-        ville: "Tunis"
-    },
-    {
-        id: 2,
-        nom: "Centre régional de Sousse",
-        ville: "Sousse"
-    },
-    {
-        id: 3,
-        nom: "Centre régional de Sfax",
-        ville: "Sfax"
-    },
-];
+import prisma from "../database/prisma.js";
 
-export async function findAll(){
-    return centres;
-}
-export async function findById(id){
-    return centres.find(centre => centre.id === id);
+export function getAll() {
+    return prisma.centre.findMany();
 }
 
-export async function searchByCity(city){
-    return centres.filter(
-        centre => centre.ville.toLowerCase() === city.toLowerCase()
-    );
+export function getById(id) {
+    return prisma.centre.findUnique({
+        where: { id }
+    });
 }
-*/
+
+export function getByVille(ville) {
+    return prisma.centre.findMany({
+        where: { ville: ville }
+    });
+}
+
+export function create(data) {
+    return prisma.centre.create({
+        data: {
+            nom: data.nom,
+            ville: data.ville,
+            adresse: data.adresse,
+            telephone: data.telephone
+        }
+    });
+}
+
+export function update(id, data) {
+    return prisma.centre.update({
+        where: { id },
+        data: {
+            nom: data.nom,
+            ville: data.ville,
+            adresse: data.adresse,
+            telephone: data.telephone
+        }
+    });
+}
+
+export function patch(id, data) {
+    return prisma.centre.update({
+        where: { id },
+        data: data
+    });
+}
+
+export function remove(id) {
+    return prisma.centre.delete({
+        where: { id }
+    });
+}

@@ -1,8 +1,12 @@
 import express from "express";
 
-import {getAll,getById,create,update,patch,remove,getByGroupeSanguin} from "../controllers/donneur.controller.js";
-
-import { validate } from "../middlewares/validate.js";
+import {
+    getAll,
+    getById,
+    create,
+    update,
+    remove
+} from "../controllers/donneur.controller.js";
 
 import {
     donneurSchema,
@@ -11,17 +15,22 @@ import {
     updateDonneurSchema
 } from "../validators/donneur.validator.js";
 
+import { validate }
+from "../middlewares/validate.js";
+
 const router = express.Router();
 
 router.get(
     "/",
     validate(donneurQuerySchema, "query"),
-    getAll);
+    getAll
+);
 
 router.get(
     "/:id",
     validate(idSchema, "params"),
-    getById);
+    getById
+);
 
 router.post(
     "/",
@@ -29,18 +38,24 @@ router.post(
     create
 );
 
-router.put("/:id",
+router.put(
+    "/:id",
     validate(idSchema, "params"),
     validate(donneurSchema, "body"),
-    update);
+    update
+);
 
-router.patch("/:id",
+router.patch(
+    "/:id",
     validate(idSchema, "params"),
     validate(updateDonneurSchema, "body"),
-    update);
+    update
+);
 
-router.delete("/:id", remove);
+router.delete(
+    "/:id",
+    validate(idSchema, "params"),
+    remove
+);
 
-router.get("/groupe", getByGroupeSanguin);
-
-export default router
+export default router;

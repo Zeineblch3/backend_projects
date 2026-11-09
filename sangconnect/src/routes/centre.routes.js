@@ -1,7 +1,12 @@
 import express from "express";
 
 import {
-    getAll, getById, create, update, patch, remove
+    getAll,
+    getById,
+    create,
+    update,
+    patch,
+    remove
 } from "../controllers/centre.controller.js";
 
 import { validate } from "../middlewares/validate.js";

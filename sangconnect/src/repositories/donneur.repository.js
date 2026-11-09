@@ -1,52 +1,54 @@
-/*const donneurs = [
-    {
-        id: 1,
-        nom: "ben ali",
-        prenom: "ahmed",
-        groupeSanguin: "O+",
-        ville: "Tunis"
-    },
-    {
-        id: 2,
-        nom: "kacem",
-        prenom: "omar",
-        groupeSanguin: "O-",
-        ville: "Tunis"
-    },
-    {
-        id: 3,
-        nom: "lallouch",
-        prenom: "zeineb",
-        groupeSanguin: "A+",
-        ville: "Sousse"
-    },
-    {
-        id: 4,
-        nom: "ameri",
-        prenom: "meriem",
-        groupeSanguin: "B+",
-        ville: "kairouan"
-    },
-    {
-        id: 5,
-        nom: "rawen",
-        prenom: "arfaoui",
-        groupeSanguin: "A+",
-        ville: "Tunis"
-    },
-    
-];
+import prisma from "../database/prisma.js"
 
-export async function findAll(){
-    return donneurs;
-}
-export async function findById(id){
-    return donneurs.find(donneur => donneur.id === id);
+export function findAll(groupeSanguin, sort) {
+    return prisma.donneurs.findMany({
+        where: groupeSanguin
+            ? { groupe_sanguin: groupeSanguin }
+            : {},
+
+        orderBy: ["nom", "prenom"].includes(sort)
+            ? { [sort]: "asc" }
+            : undefined
+    });
 }
 
-export async function searchByVille(ville){
-    return donneurs.filter(
-        donneur => donneur.ville.toLowerCase() === ville.toLowerCase()
-    );
+export function findById(id) {
+    return prisma.donneurs.findUnique({
+        where: {
+            id: id
+        }
+    });
 }
-*/
+
+export function create(data) {
+    return prisma.donneurs.create({
+        data: {
+            nom: data.nom,
+            prenom: data.prenom,
+            groupe_sanguin: data.groupeSanguin,
+            telephone: data.telephone
+        }
+    });
+}
+
+export function update(id, data) {
+    return prisma.donneurs.update({
+        where: {
+            id: id
+        },
+        data: {
+            nom: data.nom,
+            prenom: data.prenom,
+            groupe_sanguin: data.groupeSanguin,
+            telephone: data.telephone
+        }
+    });
+}
+
+export function remove(id) {
+    return prisma.donneurs.delete({
+        where: {
+            id: id
+        }
+    });
+}
