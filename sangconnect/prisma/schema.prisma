@@ -19,6 +19,7 @@ model donneurs {
   prenom        String
   groupe_sanguin String
   telephone     String?
+  dons          Don[]
 }
 
 model Centre {
@@ -27,4 +28,17 @@ model Centre {
   ville     String
   adresse   String
   telephone String
+  dons          Don[]
+}
+
+model Don {
+  id        Int      @id @default(autoincrement())
+  dateDon   DateTime @default(now())
+  volume    Int
+
+  donneurId Int
+  centreId  Int
+
+  donneur   donneurs  @relation(fields: [donneurId], references: [id])
+  centre    Centre   @relation(fields: [centreId], references: [id])
 }
