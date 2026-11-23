@@ -20,6 +20,32 @@ from "../middlewares/validate.js";
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * /api/donneurs:
+ *   get:
+ *     summary: Lister les donneurs
+ *     description: Retourne la liste des donneurs avec possibilité de filtrage.
+ *     tags:
+ *       - Donneurs
+ *     parameters:
+ *       - in: query
+ *         name: groupeSanguin
+ *         schema:
+ *           type: string
+ *         description: Filtrer par groupe sanguin.
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *         description: Trier les donneurs.
+ *     responses:
+ *       200:
+ *         description: Liste des donneurs récupérée avec succès.
+ *       400:
+ *         description: Paramètres invalides.
+ */
+
 router.get(
     "/",
     validate(donneurQuerySchema, "query"),

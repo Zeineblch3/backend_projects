@@ -21,6 +21,38 @@ router.post(
     register
 );
 
+/**
+ * @openapi
+ * /api/auth/login:
+ *   post:
+ *     summary: Authentifier un utilisateur
+ *     description: Vérifie les identifiants et retourne un token JWT.
+ *     tags:
+ *       - Authentication
+ *     security: []
+ *
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/LoginRequest'
+ *
+ *     responses:
+ *       200:
+ *         description: Authentification réussie.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/LoginResponse'
+ *
+ *       400:
+ *         description: Données de connexion invalides.
+ *
+ *       401:
+ *         description: Email ou mot de passe incorrect.
+ */
+
 router.post(
     "/login",
     validate(loginSchema, "body"),
